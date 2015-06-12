@@ -1,0 +1,16 @@
+{
+  "repositories": [
+    {
+        "type": "composer",
+        "url": "https://packages.zendframework.com/"
+    }
+  ],
+  "require": {
+    "php": ">=5.3.3",
+    "zendframework/zendframework": "^2.5",
+    "doctrine/doctrine-orm-module": "0.*",
+    "doctrine/migrations": "1.0.*@dev",
+    "neilime/zf2-twb-bundle": "2.*@stable",
+    "zendframework/zend-developer-tools": "dev-master"
+  }
+}

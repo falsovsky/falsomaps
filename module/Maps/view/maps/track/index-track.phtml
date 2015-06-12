@@ -1,0 +1,4 @@
+<?php foreach($this->tracks as $track): ?>
+	<a href="<?php echo $this->url('view-track', array('track_id' => $track->getId())); ?>">
+	<?php echo $track->getStart() . " - " . $track->getFinish();?></a>
+<?php endforeach; ?>
