@@ -73,6 +73,17 @@ return array(
             ),
         ),
 
+        'login-ajax-user' => array(
+            'type' => 'Zend\Mvc\Router\Http\Literal',
+            'options' => array(
+                'route' => '/login/ajax',
+                'defaults' => array(
+                    'controller' => 'Maps\Controller\User',
+                    'action' => 'loginAjax',
+                ),
+            ),
+        ),
+
         'logout-user' => array(
             'type' => 'Zend\Mvc\Router\Http\Literal',
             'options' => array(

@@ -38,7 +38,7 @@ class AclPlugin extends AbstractPlugin
             $this->acl->allow(array('visitor', 'user'), 'Index', array('index'));
 
             $this->acl->addResource(new Resource('User'));
-            $this->acl->allow('visitor',  'User', array('login'));
+            $this->acl->allow('visitor',  'User', array('login', 'loginAjax'));
             $this->acl->allow('user', 'User', array('logout'));
 
             $this->acl->addResource(new Resource('Track'));
