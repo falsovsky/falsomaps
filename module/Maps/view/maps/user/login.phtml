@@ -1,0 +1,7 @@
+<?php if ($this->error != false) { ?>
+<div class="alert alert-danger" role="alert"><?php echo $this->error ?></div>
+<?php } ?>
+
+<?php
+$this->form->prepare();
+echo $this->form($this->form, 'horizontal');

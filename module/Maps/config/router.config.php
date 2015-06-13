@@ -61,5 +61,28 @@ return array(
                 ),
             ),
         ),
+
+        'login-user' => array(
+            'type' => 'Zend\Mvc\Router\Http\Literal',
+            'options' => array(
+                'route' => '/login',
+                'defaults' => array(
+                    'controller' => 'Maps\Controller\User',
+                    'action' => 'login',
+                ),
+            ),
+        ),
+
+        'logout-user' => array(
+            'type' => 'Zend\Mvc\Router\Http\Literal',
+            'options' => array(
+                'route' => '/logout',
+                'defaults' => array(
+                    'controller' => 'Maps\Controller\User',
+                    'action' => 'logout',
+                ),
+            ),
+        ),
+
     ),
 );

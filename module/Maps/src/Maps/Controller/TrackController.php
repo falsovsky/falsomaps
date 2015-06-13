@@ -12,6 +12,16 @@ use Maps\Entity\Track;
 
 class TrackController extends AbstractActionController
 {
+    private $sesscontainer;
+
+    private function getSessContainer()
+    {
+        if (!$this->sesscontainer) {
+            $this->sesscontainer = $this->getServiceLocator()
+                ->get('Zend\Authentication\AuthenticationService')->getStorage()->read();
+        }
+        return $this->sesscontainer;
+    }
 
     public function indexTrackAction()
     {
@@ -67,7 +77,7 @@ class TrackController extends AbstractActionController
 
             if ($form->isValid()) {
 
-                $user = $objectManager->find('Maps\Entity\User', 1);
+                $user = $objectManager->find('Maps\Entity\User', $this->getSessContainer()->getId());
                 $track->setUser($user);
                 $track->setCreatedAt(new \DateTime("now"));
                 $track->setFilename($track->getFilename()['tmp_name']);

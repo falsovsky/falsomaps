@@ -40,11 +40,13 @@ return array(
         'invokables' => array(
             'Maps\Controller\Index' => 'Maps\Controller\IndexController',
             'Maps\Controller\Track' => 'Maps\Controller\TrackController',
+            'Maps\Controller\User'  => 'Maps\Controller\UserController',
         ),
     ),
     'controller_plugins' => array(
         'invokables' => array(
-            'setPageTitle' => 'Maps\Controller\Plugin\PageTitlePlugin',
+            'setPageTitle'  => 'Maps\Controller\Plugin\PageTitlePlugin',
+            'AclPlugin'     => 'Maps\Controller\Plugin\AclPlugin',
         )
     ),
     'view_manager' => array(

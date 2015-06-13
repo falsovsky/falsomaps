@@ -5,44 +5,48 @@ return array(
             'label' => 'Home',
             'route' => 'home',
             'icon'  => 'glyphicon glyphicon-home',
-            /*'resource'  => 'Index',
-            'privilege' => 'index',*/
+            'resource'  => 'Index',
+            'privilege' => 'index',
         ),
 
         array(
             'label' => 'Tracks',
             'route' => 'index-tracks',
             'icon'  => 'glyphicon glyphicon-home',
+            'resource'  => 'Track',
+            'privilege' => 'indexTrack',
         ),
 
         array(
             'label' => 'Add track',
             'route' => 'add-track',
-            'icon'  => 'glyphicon glyphicon-home'
+            'icon'  => 'glyphicon glyphicon-home',
+            'resource'  => 'Track',
+            'privilege' => 'addTrack',
         ),
 
-        /*
+
         array(
-            'label' => 'Menu 2',
+            'label' => 'User',
             'uri' => '#',
             'icon' => 'glyphicon glyphicon-home',
             'pages' => array(
                 array(
-                    'label' => 'Submenu',
-                    'uri' => '#',
-                    'icon' => 'glyphicon glyphicon-home'
+                    'label' => 'Login',
+                    'route' => 'login-user',
+                    'icon' => 'glyphicon glyphicon-home',
+                    'resource' => 'User',
+                    'privilege' => 'login',
                 ),
                 array(
-                    'uri' => '#',
-                    'separator' => true
+                    'label' => 'Logout',
+                    'route' => 'logout-user',
+                    'icon' => 'glyphicon glyphicon-home',
+                    'resource' => 'User',
+                    'privilege' => 'logout',
                 ),
-                array(
-                    'label' => 'Another Submenu',
-                    'uri' => '#',
-                    'icon' => 'glyphicon glyphicon-home'
-                ),
-            )
+            ),
         ),
-        */
+        
     )
 );

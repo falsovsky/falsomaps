@@ -13,6 +13,16 @@ return array(
                     'charset' => 'utf8',
                 )
             )
-        )
-    )
+        ),
+
+        'authentication' => array(
+            'orm_default' => array(
+                'object_manager' => 'Doctrine\ORM\EntityManager',
+                'identity_class' => 'Maps\Entity\User',
+                'identity_property' => 'username',
+                'credential_property' => 'password',
+            ),
+        ),
+
+    ),
 );
