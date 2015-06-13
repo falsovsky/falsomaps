@@ -98,6 +98,10 @@ class TrackFieldset extends Fieldset implements InputFilterProviderInterface
                             'extension' => 'gpx',
                         ),
                     ),
+                    // Validate file with a GPX Schema
+                    array(
+                        'name' => 'Maps\Validator\File\IsGpx'
+                    )
                 ),
             ),
         );
