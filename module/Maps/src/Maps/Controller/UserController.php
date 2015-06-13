@@ -15,6 +15,8 @@ class UserController extends AbstractActionController
 
     public function loginAction()
     {
+        $this->setPageTitle("Login");
+
         $error = false;
         $form = new LoginUserForm();
 

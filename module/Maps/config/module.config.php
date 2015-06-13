@@ -28,13 +28,13 @@ return array(
         'abstract_factories' => array(
             'Zend\Cache\Service\StorageCacheAbstractServiceFactory',
             'Zend\Log\LoggerAbstractServiceFactory',
-        ),
-        'aliases' => array(
-            'translator' => 'MvcTranslator',
+            'Zend\Navigation\Service\NavigationAbstractServiceFactory'
         ),
         'factories' => array(
-            'navigation' => 'Zend\Navigation\Service\DefaultNavigationFactory',
+            //'navigation' => 'Zend\Navigation\Service\DefaultNavigationFactory',
+            'UserNavigation' => 'Maps\Navigation\UserNavigationFactory'
         ),
+
     ),
     'controllers' => array(
         'invokables' => array(

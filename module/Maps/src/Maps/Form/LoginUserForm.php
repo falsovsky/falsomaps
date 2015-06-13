@@ -3,9 +3,10 @@
 namespace Maps\Form;
 
 use Zend\Form\Form;
-use Zend\InputFilter\InputFilter;
+use Zend\InputFilter\InputFilterProviderInterface;
 
-class LoginUserForm extends Form
+
+class LoginUserForm extends Form implements InputFilterProviderInterface
 {
 
     public function __construct()
@@ -24,7 +25,7 @@ class LoginUserForm extends Form
             'options' => array(
                 'label'            => 'Username',
                 'column-size'      => 'sm-4',
-                'label_attributes' => array('class' => 'col-sm-2')
+                'label_attributes' => array('class' => 'col-sm-2'),
             ),
         ));
         
@@ -43,7 +44,7 @@ class LoginUserForm extends Form
             ),
             
         ));
-        
+
         $this->add(array(
             'name' => 'hash',
             'type' => 'csrf',
@@ -51,7 +52,7 @@ class LoginUserForm extends Form
                 'id' => 'csrf',
             ),
         ));
-        
+
         $this->add(array(
             'name'       => 'button-submit',
             'type'       => 'button',
@@ -62,61 +63,49 @@ class LoginUserForm extends Form
             )
         ));
         
-        $this->setInputFilter($this->_getInputFilters());
+        //$this->setInputFilter($this->_getInputFilters());
     }
 
-    
-    /**
-     * _getInputFilters 
-     * 
-     * @access private
-     * @return void
-     */
-    private function _getInputFilters() {
-        
-        $inputFilter = new InputFilter();
-        
-        // Username
-        $inputFilter->add(array(
-            'name'          => 'username',
-            'required'      => true,
-            'filters' => array(
-                array('name' => 'StripTags'),
-                array('name' => 'StringTrim'),
-            ),            
-            'validators'    => array(
-                array(
-                    'name'    => 'StringLength',
-                    'options' => array(
-                        'encoding' => 'UTF-8',
-                        'min'      => 2,
-                        'max'      => 25,
-                    ),
-                ),                
-            ),
-        ));
-        
-        // Password
-        $inputFilter->add(array(
-            'name'          => 'password',
-            'required'      => true,
-            'filters' => array(
-                array('name' => 'StripTags'),
-                array('name' => 'StringTrim'),
-            ),
-            'validators'    => array(
-                array(
-                    'name'    => 'StringLength',
-                    'options' => array(
-                        'encoding' => 'UTF-8',
-                        'min'      => 3,
-                        'max'      => 255,
-                    ),
+    public function getInputFilterSpecification()
+    {
+        return array(
+            'username' => array(
+                'required' => true,
+                'filters' => array(
+                    array('name' => 'StripTags'),
+                    array('name' => 'StringTrim')
                 ),
+                'validators' => array(
+                    array(
+                        'name'    => 'StringLength',
+                        'options' => array(
+                            'encoding' => 'UTF-8',
+                            'min'      => 2,
+                            'max'      => 25
+                        )
+                    )
+                )
             ),
-        ));        
-        
-        return $inputFilter;
+
+            'password' => array(
+                'required' => true,
+                'filters' => array(
+                    array('name' => 'StripTags'),
+                    array('name' => 'StringTrim')
+                ),
+                'validators' => array(
+                    array(
+                        'name'    => 'StringLength',
+                        'options' => array(
+                            'encoding' => 'UTF-8',
+                            'min'      => 3,
+                            'max'      => 255
+                        )
+                    )
+                )
+            )
+        );
     }
+
 }
 

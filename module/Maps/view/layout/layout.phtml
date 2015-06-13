@@ -36,9 +36,15 @@
             </div>
             <div id="navbar" class="navbar-collapse collapse">
                 <?php echo $this->
-                    navigation('navigation')
+                    navigation('Zend\Navigation\Default')
                     ->menu()
                     ->setUlClass('nav navbar-nav')
+                    ->setPartial('partial/bootstrap3-navbar.phtml')
+                ?>
+               <?php echo $this->
+                    navigation('UserNavigation')
+                    ->menu()
+                    ->setUlClass('nav navbar-nav navbar-right')
                     ->setPartial('partial/bootstrap3-navbar.phtml')
                 ?>
             </div>

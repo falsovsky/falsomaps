@@ -12,7 +12,7 @@ return array(
         array(
             'label' => 'Tracks',
             'route' => 'index-tracks',
-            'icon'  => 'glyphicon glyphicon-home',
+            'icon'  => 'glyphicon glyphicon-th-list',
             'resource'  => 'Track',
             'privilege' => 'indexTrack',
         ),
@@ -20,33 +20,11 @@ return array(
         array(
             'label' => 'Add track',
             'route' => 'add-track',
-            'icon'  => 'glyphicon glyphicon-home',
+            'icon'  => 'glyphicon glyphicon-plus',
             'resource'  => 'Track',
             'privilege' => 'addTrack',
         ),
 
+    ),
 
-        array(
-            'label' => 'User',
-            'uri' => '#',
-            'icon' => 'glyphicon glyphicon-home',
-            'pages' => array(
-                array(
-                    'label' => 'Login',
-                    'route' => 'login-user',
-                    'icon' => 'glyphicon glyphicon-home',
-                    'resource' => 'User',
-                    'privilege' => 'login',
-                ),
-                array(
-                    'label' => 'Logout',
-                    'route' => 'logout-user',
-                    'icon' => 'glyphicon glyphicon-home',
-                    'resource' => 'User',
-                    'privilege' => 'logout',
-                ),
-            ),
-        ),
-        
-    )
 );
