@@ -10,3 +10,4 @@ composer.lock
 composer.phar
 vendor/bin
 vendor
+doctrine.local.php
