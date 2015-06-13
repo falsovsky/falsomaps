@@ -49,11 +49,12 @@
                     ->setUlClass('nav navbar-nav')
                     ->setPartial('partial/bootstrap3-navbar.phtml')
                 ?>
-               <?php echo $this->
-                    navigation('UserNavigation')
-                    ->menu()
-                    ->setUlClass('nav navbar-nav navbar-right')
-                    ->setPartial('partial/bootstrap3-navbar.phtml')
+                <?php
+                if ($user = $this->identity()) {
+                    echo $this->partial('layout/nav-account', array('user' => $user));
+                } else {
+                    echo $this->partial('layout/nav-login');
+                }
                 ?>
                 <ul class="nav navbar-nav navbar-right">
                     <li class="active"><a href="#"><?php echo $title ?></a></li>
