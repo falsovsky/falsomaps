@@ -77,7 +77,7 @@ class UserController extends AbstractActionController
                     array(
                         'name' => 'string_length',
                         'options' => array(
-                            'min' => 5
+                            'min' => 4
                         ),
                     ),
                 ),

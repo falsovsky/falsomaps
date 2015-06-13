@@ -19,6 +19,7 @@
         ?>
 
         <?php echo $this->headScript()
+            ->prependFile($this->basePath() . '/js/ajaxlogin.js')
             ->prependFile($this->basePath() . '/js/map.js')
             ->prependFile($this->basePath() . '/js/gpx.js')
             ->prependFile($this->basePath() . '/js/leaflet.elevation-0.0.4.min.js')
