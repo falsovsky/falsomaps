@@ -16,19 +16,19 @@ class TrackFieldset extends Fieldset implements InputFilterProviderInterface
 
         $this->setHydrator(new DoctrineHydrator($objectManager))
             ->setObject(new Track());
-
+/*
         $this->add(array(
             'type' => 'Zend\Form\Element\Hidden',
             'name' => 'id'
         ));
-
+*/
         $this->add(array(
             'type' => 'Zend\Form\Element\Text',
             'name' => 'start',
             'options' => array(
                 'label' => 'Start',
-                'column-size'      => 'sm-2',
-                'label_attributes' => array('class' => 'col-sm-1')
+                //'column-size'      => 'sm-2',
+                //'label_attributes' => array('class' => 'col-sm-1')
             )
         ));
 
@@ -37,8 +37,8 @@ class TrackFieldset extends Fieldset implements InputFilterProviderInterface
             'name' => 'finish',
             'options' => array(
                 'label' => 'Finish',
-                'column-size'      => 'sm-2',
-                'label_attributes' => array('class' => 'col-sm-1')
+                //'column-size'      => 'sm-2',
+                //'label_attributes' => array('class' => 'col-sm-1')
             )
         ));
 
@@ -47,8 +47,8 @@ class TrackFieldset extends Fieldset implements InputFilterProviderInterface
             'name' => 'device',
             'options' => array(
                 'label' => 'Device',
-                'column-size'      => 'sm-2',
-                'label_attributes' => array('class' => 'col-sm-1')
+                //'column-size'      => 'sm-2',
+                //'label_attributes' => array('class' => 'col-sm-1')
             )
         ));
 
@@ -57,8 +57,8 @@ class TrackFieldset extends Fieldset implements InputFilterProviderInterface
             'name' => 'filename',
             'options' => array(
                 'label'            => 'File',
-                'column-size'      => 'sm-2',
-                'label_attributes' => array('class' => 'col-sm-1')
+                //'column-size'      => 'sm-2',
+                //'label_attributes' => array('class' => 'col-sm-1')
             ),
             'attributes' => array(
                 'id' => 'filename',
@@ -70,9 +70,11 @@ class TrackFieldset extends Fieldset implements InputFilterProviderInterface
     public function getInputFilterSpecification()
     {
         return array(
+            /*
             'id' => array(
                 'required' => false
             ),
+            */
             'start' => array(
                 'required' => true
             ),
@@ -91,16 +93,19 @@ class TrackFieldset extends Fieldset implements InputFilterProviderInterface
                             'min' => 120,
                             'max' => 200000,
                         ),
+                        'break_chain_on_failure' => true,
                     ),
                     array(
                         'name' => 'Zend\Validator\File\Extension',
                         'options' => array(
                             'extension' => 'gpx',
                         ),
+                        'break_chain_on_failure' => true,
                     ),
                     // Validate file with a GPX Schema
                     array(
-                        'name' => 'Maps\Validator\File\IsGpx'
+                        'name' => 'Maps\Validator\File\IsGpx',
+                        'break_chain_on_failure' => true,
                     )
                 ),
             ),

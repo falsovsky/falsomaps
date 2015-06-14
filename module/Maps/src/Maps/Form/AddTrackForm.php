@@ -23,7 +23,7 @@ class AddTrackForm extends Form
             'attributes' => array('type' => 'submit'),
             'options'    => array(
                 'label' => 'Submit',
-                'column-size' => 'sm-10 col-sm-offset-1',
+                //'column-size' => 'sm-10 col-sm-offset-1',
             )
         ));
     }

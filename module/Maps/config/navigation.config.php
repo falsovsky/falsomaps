@@ -14,7 +14,7 @@ return array(
             'route' => 'index-tracks',
             'icon'  => 'glyphicon glyphicon-th-list',
             'resource'  => 'Track',
-            'privilege' => 'indexTrack',
+            'privilege' => 'index',
         ),
 
         array(
@@ -22,7 +22,7 @@ return array(
             'route' => 'add-track',
             'icon'  => 'glyphicon glyphicon-plus',
             'resource'  => 'Track',
-            'privilege' => 'addTrack',
+            'privilege' => 'add',
         ),
 
     ),

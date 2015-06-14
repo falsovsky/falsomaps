@@ -9,7 +9,8 @@
             ->appendName('author', 'Pedro de Oliveira')
         ?>
 
-        <?php echo $this->headTitle('fALSO Maps')->setSeparator(' - ')->setAutoEscape(false) ?>
+        <?php echo $this->headTitle('fALSO Maps')->setSeparator(' - ')->setAutoEscape(false)
+            ->append($this->layout()->pageTitle); ?>
 
         <?php echo $this->headLink()
             ->prependStylesheet($this->basePath() . '/css/mine.css')
@@ -17,7 +18,7 @@
         ?>
 
         <?php echo $this->headScript()
-            ->prependFile($this->basePath() . '/js/ajaxlogin.js')
+            ->prependFile($this->basePath() . '/js/user.js')
             ->prependFile($this->basePath() . '/js/jquery.bootstrap-growl.min.js')
             ->prependFile($this->basePath() . '/js/bootstrap.min.js')
             ->prependFile('https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js')
@@ -44,19 +45,11 @@
                     ->setPartial('partial/bootstrap3-navbar.phtml')
                 ?>
 
-               <?php /* echo $this->
-                    navigation('UserNavigation')
-                    ->menu()
-                    ->setUlClass('nav navbar-nav navbar-right')
-                    ->setPartial('partial/bootstrap3-navbar.phtml') */
-                ?>
-
                 <?php
-                if ($user = $this->identity()) {
+                if ($user = $this->identity())
                     echo $this->partial('layout/nav-account', array('user' => $user));
-                } else {
+                else
                     echo $this->partial('layout/nav-login');
-                }
                 ?>
             </div>
           </div>
@@ -66,7 +59,7 @@
 
             <div class="row">
                 <div class="col-lg-12">
-                    <h1 class="page-header"><?php echo $this->layout()->pageTitle; ?></h1>
+                    <h1 class="page-header"><?php echo $this->layout()->pageTitle ?></h1>
                 </div>
             </div>
 

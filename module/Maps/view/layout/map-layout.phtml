@@ -19,7 +19,7 @@
         ?>
 
         <?php echo $this->headScript()
-            ->prependFile($this->basePath() . '/js/ajaxlogin.js')
+            ->prependFile($this->basePath() . '/js/user.js')
             ->prependFile($this->basePath() . '/js/map.js')
             ->prependFile($this->basePath() . '/js/gpx.js')
             ->prependFile($this->basePath() . '/js/leaflet.elevation-0.0.4.min.js')
@@ -51,15 +51,30 @@
                     ->setPartial('partial/bootstrap3-navbar.phtml')
                 ?>
                 <?php
-                if ($user = $this->identity()) {
+                if ($user = $this->identity())
                     echo $this->partial('layout/nav-account', array('user' => $user));
-                } else {
+                else
                     echo $this->partial('layout/nav-login');
-                }
                 ?>
+
+               <?php /* echo $this->
+                    navigation('TrackNavigation')
+                    ->menu()
+                    ->setUlClass('nav navbar-nav navbar-right')
+                    ->setPartial('partial/bootstrap3-navbar.phtml') */
+                ?>
+
                 <ul class="nav navbar-nav navbar-right">
-                    <li class="active"><a href="#"><?php echo $title ?></a></li>
+                    <!--<li class="active"><a href="#"><?php echo $trackTitle ?></a></li>-->
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="true"><?php echo $trackTitle ?><span class="caret"></span></a>
+                        <ul class="dropdown-menu" role="menu">
+                            <li><a href="#">Edit</a></li>
+                            <li><a href="<?php echo $this->url('delete-track', array('track_id' => $trackId)) ?>">Delete</a></li>
+                        </ul>
+                    </li>
                 </ul>
+
             </div>
           </div>
         </nav>

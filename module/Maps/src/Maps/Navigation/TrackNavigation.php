@@ -5,7 +5,7 @@ namespace Maps\Navigation;
 use Zend\ServiceManager\ServiceLocatorInterface;
 use Zend\Navigation\Service\DefaultNavigationFactory;
 
-class UserNavigation extends DefaultNavigationFactory
+class TrackNavigation extends DefaultNavigationFactory
 {
 
     protected function getPages(ServiceLocatorInterface $serviceLocator)
@@ -17,23 +17,25 @@ class UserNavigation extends DefaultNavigationFactory
 
         if (null === $this->pages) {
             $navigation[] = array (
-                'label' => $sessContainer == NULL ? 'Hi visitor' : 'Hello, ' . $sessContainer->getUsername() . "!",
+                'label' => "OIX",
                 'uri' => '#',
                 //'icon' => 'glyphicon glyphicon-home',
                 'pages' => array(
                     array(
-                        'label' => 'Login',
-                        'route' => 'login-user',
-                        'icon' => 'glyphicon glyphicon-user',
-                        'resource' => 'User',
-                        'privilege' => 'login',
+                        'label' => 'Edit',
+                        'uri'   => '#',
+                        //'route' => 'login-user',
+                        //'icon' => 'glyphicon glyphicon-user',
+                        //'resource' => 'Track',
+                        //'privilege' => 'login',
                     ),
                     array(
-                        'label' => 'Logout',
-                        'route' => 'logout-user',
-                        'icon' => 'glyphicon glyphicon-log-out',
-                        'resource' => 'User',
-                        'privilege' => 'logout',
+                        'label' => 'Delete',
+                        'uri'   => '#',
+                        //'route' => 'logout-user',
+                        //'icon' => 'glyphicon glyphicon-log-out',
+                        //'resource' => 'User',
+                        //'privilege' => 'logout',
                     )
                 )
             );

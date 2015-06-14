@@ -24,8 +24,8 @@ class LoginUserForm extends Form implements InputFilterProviderInterface
 
             'options' => array(
                 'label'            => 'Username',
-                'column-size'      => 'sm-4',
-                'label_attributes' => array('class' => 'col-sm-2'),
+                //'column-size'      => 'sm-4',
+                //'label_attributes' => array('class' => 'col-sm-2'),
             ),
         ));
         
@@ -39,8 +39,8 @@ class LoginUserForm extends Form implements InputFilterProviderInterface
 
             'options' => array(
                 'label'            => 'Password',
-                'column-size'      => 'sm-4',
-                'label_attributes' => array('class' => 'col-sm-2')
+                //'column-size'      => 'sm-4',
+                //'label_attributes' => array('class' => 'col-sm-2')
             ),
             
         ));
@@ -59,11 +59,10 @@ class LoginUserForm extends Form implements InputFilterProviderInterface
             'attributes' => array('type' => 'submit'),
             'options'    => array(
                 'label' => 'Submit',
-                'column-size' => 'sm-10 col-sm-offset-1',
+                //'column-size' => 'sm-10 col-sm-offset-1',
             )
         ));
         
-        //$this->setInputFilter($this->_getInputFilters());
     }
 
     public function getInputFilterSpecification()

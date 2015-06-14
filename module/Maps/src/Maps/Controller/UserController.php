@@ -58,12 +58,14 @@ class UserController extends AbstractActionController
                 'validators' => array(
                     array(
                         'name' => 'not_empty',
+                        'break_chain_on_failure' => true,
                     ),
                     array(
                         'name' => 'string_length',
                         'options' => array(
                             'min' => 3
                         ),
+                        'break_chain_on_failure' => true,
                     ),
                 ),
             ),
@@ -73,12 +75,15 @@ class UserController extends AbstractActionController
                 'validators' => array(
                     array(
                         'name' => 'not_empty',
+                        'break_chain_on_failure' => true,
                     ),
+
                     array(
                         'name' => 'string_length',
                         'options' => array(
                             'min' => 4
                         ),
+                        'break_chain_on_failure' => true,
                     ),
                 ),
             ),
@@ -116,6 +121,18 @@ class UserController extends AbstractActionController
         $authService = $this->getServiceLocator()->get('Zend\Authentication\AuthenticationService');
         $authService->clearIdentity();
         return $this->redirect()->toRoute('home');
+    }
+
+    public function logoutAjaxAction()
+    {
+        $result = array(
+            'status' => 1,
+        );
+
+        $authService = $this->getServiceLocator()->get('Zend\Authentication\AuthenticationService');
+        $authService->clearIdentity();
+
+        return new JsonModel($result);
     }
 
     protected function _login($username, $password)

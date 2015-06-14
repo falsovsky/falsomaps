@@ -18,7 +18,7 @@ return array(
                 'route' => '/tracks',
                 'defaults' => array(
                     'controller' => 'Maps\Controller\Track',
-                    'action' => 'indexTrack',
+                    'action' => 'index',
                 ),
             ),
         ),
@@ -29,7 +29,7 @@ return array(
                 'route' => '/track/add',
                 'defaults' => array(
                     'controller' => 'Maps\Controller\Track',
-                    'action' => 'addTrack',
+                    'action' => 'add',
                 ),
             ),
         ),
@@ -43,7 +43,7 @@ return array(
                 ),
                 'defaults' => array(
                     'controller' => 'Maps\Controller\Track',
-                    'action' => 'viewTrack',
+                    'action' => 'view',
                 ),
             ),
         ),
@@ -57,7 +57,21 @@ return array(
                 ),
                 'defaults' => array(
                     'controller' => 'Maps\Controller\Track',
-                    'action' => 'getTrack',
+                    'action' => 'getGpx',
+                ),
+            ),
+        ),
+
+        'delete-track' => array(
+            'type' => 'Segment',
+            'options' => array(
+                'route' => '/track/delete/:track_id',
+                'constraints' => array(
+                    'track_id' => '\d+',
+                ),
+                'defaults' => array(
+                    'controller' => 'Maps\Controller\Track',
+                    'action' => 'delete',
                 ),
             ),
         ),
@@ -91,6 +105,17 @@ return array(
                 'defaults' => array(
                     'controller' => 'Maps\Controller\User',
                     'action' => 'logout',
+                ),
+            ),
+        ),
+
+        'logout-ajax-user' => array(
+            'type' => 'Zend\Mvc\Router\Http\Literal',
+            'options' => array(
+                'route' => '/logout/ajax',
+                'defaults' => array(
+                    'controller' => 'Maps\Controller\User',
+                    'action' => 'logoutAjax',
                 ),
             ),
         ),

@@ -5,11 +5,11 @@ namespace Maps\Navigation;
 use Zend\ServiceManager\FactoryInterface;
 use Zend\ServiceManager\ServiceLocatorInterface;
 
-class UserNavigationFactory implements FactoryInterface
+class TrackNavigationFactory implements FactoryInterface
 {
     public function createService(ServiceLocatorInterface $serviceLocator)
     {
-        $navigation = new UserNavigation();
+        $navigation = new TrackNavigation();
         return $navigation->createService($serviceLocator);
     }
 }

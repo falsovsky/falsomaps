@@ -23,6 +23,7 @@ class AclPlugin extends AbstractPlugin
             $this->sesscontainer = $this->getController()->getServiceLocator()
                 ->get('Zend\Authentication\AuthenticationService')->getStorage()->read();
         }
+
         return $this->sesscontainer;
     }
 
@@ -39,11 +40,11 @@ class AclPlugin extends AbstractPlugin
 
             $this->acl->addResource(new Resource('User'));
             $this->acl->allow('visitor',  'User', array('login', 'loginAjax'));
-            $this->acl->allow('user', 'User', array('logout'));
+            $this->acl->allow('user', 'User', array('logout', 'logoutAjax'));
 
             $this->acl->addResource(new Resource('Track'));
             $this->acl->allow(array('user'), 'Track');
-            $this->acl->allow(array('visitor'), 'Track', array('indexTrack', 'viewTrack', 'getTrack'));
+            $this->acl->allow(array('visitor'), 'Track', array('index', 'view', 'getGpx'));
         }
         
         return $this->acl;
@@ -62,7 +63,7 @@ class AclPlugin extends AbstractPlugin
         \Zend\View\Helper\Navigation::setDefaultAcl($this->acl);
         \Zend\View\Helper\Navigation::setDefaultRole($roleName);
 
-        if ( ! $this->acl->isAllowed($roleName, $controllerName, $actionName)) {
+        if (!$this->acl->isAllowed($roleName, $controllerName, $actionName)) {
 
             $router = $e->getRouter();
             $url    = $router->assemble(array('controller' => 'index', 'action' => 'index'), array('name' => 'home'));
@@ -70,7 +71,6 @@ class AclPlugin extends AbstractPlugin
             $response = $e->getResponse();
             $response->setStatusCode(302);
 
-            //redirect to login route...
             $response->getHeaders()->addHeaderLine('Location', $url);
             $e->stopPropagation();            
         }

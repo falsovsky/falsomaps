@@ -12,18 +12,18 @@ use Maps\Entity\Track;
 
 class TrackController extends AbstractActionController
 {
-    private $sesscontainer;
+    private $sessContainer;
 
     private function getSessContainer()
     {
-        if (!$this->sesscontainer) {
-            $this->sesscontainer = $this->getServiceLocator()
+        if (!$this->sessContainer) {
+            $this->sessContainer = $this->getServiceLocator()
                 ->get('Zend\Authentication\AuthenticationService')->getStorage()->read();
         }
-        return $this->sesscontainer;
+        return $this->sessContainer;
     }
 
-    public function indexTrackAction()
+    public function indexAction()
     {
         $this->setPageTitle("All tracks");
 
@@ -38,7 +38,7 @@ class TrackController extends AbstractActionController
         );
     }
 
-    public function viewTrackAction()
+    public function viewAction()
     {
         $objectManager = $this->getServiceLocator()->get('Doctrine\ORM\EntityManager');
 
@@ -46,7 +46,8 @@ class TrackController extends AbstractActionController
         if ($track === null) return $this->redirect()->toRoute('tracks');
 
         $this->layout('layout/map-layout');
-        $this->layout()->title = $track->getStart() . " - " . $track->getFinish();
+        $this->layout()->trackTitle = $track->getStart() . " - " . $track->getFinish();
+        $this->layout()->trackId = $track->getId();
 
         return new ViewModel(
             array(
@@ -55,7 +56,7 @@ class TrackController extends AbstractActionController
         );
     }
 
-    public function addTrackAction()
+    public function addAction()
     {
         $objectManager = $this->getServiceLocator()->get('Doctrine\ORM\EntityManager');
 
@@ -104,25 +105,25 @@ class TrackController extends AbstractActionController
     }
 
 
-    public function deleteTrackAction()
+    public function deleteAction()
     {
         $objectManager = $this->getServiceLocator()->get('Doctrine\ORM\EntityManager');
 
         $track = $objectManager->find('Maps\Entity\Track', $this->params('track_id'));
-        if ($track === null) return $this->redirect()->toRoute('tracks');
+        if ($track === null) return $this->redirect()->toRoute('index-tracks');
 
         $path = $track->getFilename();
         if (file_exists($path)) {
             unlink($path);
         }
 
-        $objectManager->remove($$track);
+        $objectManager->remove($track);
         $objectManager->flush();
 
-        return $this->redirect()->toRoute('tracks');
+        return $this->redirect()->toRoute('index-tracks');
     }
 
-    public function getTrackAction()
+    public function getGpxAction()
     {
         $objectManager = $this->getServiceLocator()->get('Doctrine\ORM\EntityManager');
 
