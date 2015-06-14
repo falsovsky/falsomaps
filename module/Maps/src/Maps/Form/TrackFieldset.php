@@ -91,7 +91,7 @@ class TrackFieldset extends Fieldset implements InputFilterProviderInterface
                         'name' => 'Zend\Validator\File\Size',
                         'options' => array(
                             'min' => 120,
-                            'max' => 200000,
+                            'max' => 600000,
                         ),
                         'break_chain_on_failure' => true,
                     ),

@@ -32,7 +32,6 @@ return array(
         ),
         'factories' => array(
             //'navigation' => 'Zend\Navigation\Service\DefaultNavigationFactory',
-            //'TrackNavigation' => 'Maps\Navigation\TrackNavigationFactory'
         ),
 
     ),

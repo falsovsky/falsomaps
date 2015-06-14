@@ -43,8 +43,8 @@ class AclPlugin extends AbstractPlugin
             $this->acl->allow('user', 'User', array('logout', 'logoutAjax'));
 
             $this->acl->addResource(new Resource('Track'));
-            $this->acl->allow(array('user'), 'Track');
-            $this->acl->allow(array('visitor'), 'Track', array('index', 'view', 'getGpx'));
+            $this->acl->allow(array('visitor','user'), 'Track', array('index', 'view', 'getGpx'));
+            $this->acl->allow(array('user'), 'Track', array('edit', 'delete'), new TrackAssertion($this->getSessContainer(), $this->getController()));
         }
         
         return $this->acl;
@@ -75,4 +75,41 @@ class AclPlugin extends AbstractPlugin
             $e->stopPropagation();            
         }
     }
+}
+
+class TrackAssertion implements AssertionInterface
+{
+    private $user;
+    private $controller;
+
+    public function __construct($user, $controller) {
+        $this->user = $user;
+        $this->controller = $controller;
+    }
+
+    public function assert(Acl $acl,
+        RoleInterface $role = null,
+        ResourceInterface $resource = null,
+        $privilege = null)
+    {
+        $access = false;
+
+        $trackId = $this->controller->params()->fromRoute('track_id', 0);
+
+        if ($trackId != 0) {
+            $objectManager = $this->controller->getServiceLocator()->get('Doctrine\ORM\EntityManager');
+            $track = $objectManager->find('Maps\Entity\Track', $trackId);
+
+            if ($track != null)
+            {
+                if ($this->user->getId() == $track->getUser()->getId())
+                {
+                    $access = true;
+                }
+            }
+        }
+
+        return $access;
+    }
+
 }

@@ -104,6 +104,10 @@ class TrackController extends AbstractActionController
         );
     }
 
+    public function editAction()
+    {
+
+    }
 
     public function deleteAction()
     {

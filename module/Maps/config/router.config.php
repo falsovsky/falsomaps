@@ -62,6 +62,20 @@ return array(
             ),
         ),
 
+        'edit-track' => array(
+            'type' => 'Segment',
+            'options' => array(
+                'route' => '/track/edit/:track_id',
+                'constraints' => array(
+                    'track_id' => '\d+',
+                ),
+                'defaults' => array(
+                    'controller' => 'Maps\Controller\Track',
+                    'action' => 'edit',
+                ),
+            ),
+        ),
+
         'delete-track' => array(
             'type' => 'Segment',
             'options' => array(
