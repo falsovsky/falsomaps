@@ -67,9 +67,9 @@ class TrackFieldset extends Fieldset implements InputFilterProviderInterface
                 'required' => false
             ),
             'filename' => array(
-                'required' => false,
+                'required' => true,
+                'allow_empty' => false,
                 'type' => 'Zend\InputFilter\FileInput',
-                'allow_empty' => true,
                 'validators' => array(
                     array(
                         'name' => 'Zend\Validator\File\Size',

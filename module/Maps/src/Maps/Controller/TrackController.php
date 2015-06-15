@@ -132,9 +132,14 @@ class TrackController extends AbstractActionController
         $track = $objectManager->find('Maps\Entity\Track', $this->params('track_id'));
         if ($track === null) return $this->redirect()->toRoute('tracks');
 
+        $origFilename = $track->getFilename();
+
         $this->setPageTitle("Edit track");
 
         $form = new TrackForm($objectManager);
+
+        $form->getInputFilter()->get('track')->get("filename")->setRequired(FALSE);
+        $form->getInputFilter()->get('track')->get("filename")->setAllowEmpty(TRUE);
 
         $form->bind($track);
 
@@ -152,11 +157,15 @@ class TrackController extends AbstractActionController
                 // Update file if sent
                 if ($form->get('track')->get('filename')->getValue()['error'] == 0)
                 {
+                    $track->setFilename($track->getFilename()['tmp_name']);
                     $newPath = $this->getGpxPath($track->getId());
                     @unlink($newPath);
                     $filter = new RenameFilter($newPath);
                     $filter->filter($track->getFilename());
                     $track->setFilename($newPath);
+                    var_dump($newPath);
+                } else {
+                    $track->setFilename($origFilename);
                 }
 
                 $objectManager->persist($track);
