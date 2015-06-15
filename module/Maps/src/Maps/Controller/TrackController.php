@@ -45,10 +45,8 @@ class TrackController extends AbstractActionController
                 'start' => date("F j, Y, H:i", $gpxStats->start),
                 'end' => date("F j, Y, H:i", $gpxStats->end),
             );
-*/
-
-
         }
+*/
 
         return new ViewModel(
             array(
