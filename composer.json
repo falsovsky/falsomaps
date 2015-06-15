@@ -12,5 +12,8 @@
     "doctrine/migrations": "1.0.*@dev",
     "neilime/zf2-twb-bundle": "2.*@stable",
     "zendframework/zend-developer-tools": "dev-master"
+  },
+  "require-dev": {
+    "phpunit/phpunit": "^4.7"
   }
 }
