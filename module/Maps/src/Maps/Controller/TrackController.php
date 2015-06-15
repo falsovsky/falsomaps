@@ -33,7 +33,7 @@ class TrackController extends AbstractActionController
         $tracks = $objectManager->getRepository('Maps\Entity\Track')->findAll();
 
         $stats = array();
-
+/*
         foreach($tracks as $track) {
             $gpx = new GPXIngest();
             $gpx->loadFile($track->getFilename());
@@ -45,7 +45,7 @@ class TrackController extends AbstractActionController
                 'start' => date("F j, Y, H:i", $gpxStats->start),
                 'end' => date("F j, Y, H:i", $gpxStats->end),
             );
-
+*/
 
 
         }
