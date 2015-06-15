@@ -5,11 +5,11 @@ use Doctrine\Common\Persistence\ObjectManager;
 use DoctrineModule\Stdlib\Hydrator\DoctrineObject as DoctrineHydrator;
 use Zend\Form\Form;
 
-class AddTrackForm extends Form
+class TrackForm extends Form
 {
     public function __construct(ObjectManager $objectManager)
     {
-        parent::__construct('add-track-form');
+        parent::__construct('track-form');
 
         $this->setHydrator(new DoctrineHydrator($objectManager));
 

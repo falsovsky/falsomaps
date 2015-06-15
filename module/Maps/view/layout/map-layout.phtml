@@ -9,7 +9,8 @@
             ->appendName('author', 'Pedro de Oliveira')
         ?>
 
-        <?php echo $this->headTitle('fALSO Maps')->setSeparator(' - ')->setAutoEscape(false) ?>
+        <?php echo $this->headTitle('fALSO Maps')->setSeparator(' - ')->setAutoEscape(false)
+            ->append($trackTitle); ?>
 
         <?php echo $this->headLink()
             ->prependStylesheet($this->basePath() . '/css/mine.css')

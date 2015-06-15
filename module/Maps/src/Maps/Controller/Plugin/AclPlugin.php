@@ -44,6 +44,7 @@ class AclPlugin extends AbstractPlugin
 
             $this->acl->addResource(new Resource('Track'));
             $this->acl->allow(array('visitor','user'), 'Track', array('index', 'view', 'getGpx'));
+            $this->acl->allow(array('user'), 'Track', array('add'));
             $this->acl->allow(array('user'), 'Track', array('edit', 'delete'), new TrackAssertion($this->getSessContainer(), $this->getController()));
         }
         

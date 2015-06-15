@@ -6,7 +6,7 @@ use Zend\Form\Form;
 use Zend\InputFilter\InputFilterProviderInterface;
 
 
-class LoginUserForm extends Form implements InputFilterProviderInterface
+class LoginForm extends Form implements InputFilterProviderInterface
 {
 
     public function __construct()

@@ -1,4 +1,12 @@
+	<div class="list-group">
 <?php foreach($this->tracks as $track): ?>
-	<a href="<?php echo $this->url('view-track', array('track_id' => $track->getId())); ?>">
-	<?php echo $track->getStart() . " - " . $track->getFinish();?></a><br/>
+        <a href="<?php echo $this->url('view-track', array('track_id' => $track->getId())); ?>" class="list-group-item">
+            <h4 class="list-group-item-heading"><?php echo $track->getStart() . " - " . $track->getFinish();?></h4>
+            <p class="list-group-item-text">
+				<?php foreach($this->stats[$track->getId()] as $k => $v): ?>
+					<span class="label label-primary"><?php echo $k . ": " . $v ?></span>
+				<?php endforeach; ?>
+            </p>
+        </a>
 <?php endforeach; ?>
+    </div>

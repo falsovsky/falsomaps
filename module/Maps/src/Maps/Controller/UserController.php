@@ -7,7 +7,7 @@ use Zend\Authentication\AuthenticationService;
 use Zend\View\Model\JsonModel;
 use Zend\InputFilter\Factory;
 
-use Maps\Form\LoginUserForm;
+use Maps\Form\LoginForm;
 use Maps\Entity\User;
 
 
@@ -19,7 +19,7 @@ class UserController extends AbstractActionController
         $this->setPageTitle("Login");
 
         $error = false;
-        $form = new LoginUserForm();
+        $form = new LoginForm();
 
         if ($this->request->isPost()) {
             $form->setData($this->request->getPost());
