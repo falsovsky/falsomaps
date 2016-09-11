@@ -1,8 +1,0 @@
-https://github.com/doctrine/DoctrineModule/blob/master/docs/hydrator.md
-http://framework.zend.com/manual/2.1/en/modules/zend.authentication.intro.html
-http://framework.zend.com/manual/2.0/en/modules/zend.form.collections.html
-http://framework.zend.com/manual/2.3/en/modules/zend.form.file-upload.html
-http://marco-pivetta.com/doctrine-orm-zf2-tutorial/
-http://docs.doctrine-project.org/en/2.0.x/reference/annotations-reference.html
-http://zf2cheatsheet.com/
-https://github.com/psamatt/zf2-doctrine-example <- Belos exemplos nos controllers

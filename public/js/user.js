@@ -1,4 +1,4 @@
-$( document ).ready(function() {
+$(document).ready(function() {
 
     $("#login-nav").submit(function(event)
     {
@@ -61,4 +61,3 @@ $( document ).ready(function() {
     });
 
 });
-

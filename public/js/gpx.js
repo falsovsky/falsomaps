@@ -51,10 +51,7 @@ var _DEFAULT_MARKER_OPTS = {
   shadowAnchor: [16, 47]
 };
 var _DEFAULT_POLYLINE_OPTS = {
-	color:'blue'
-};
-var _DEFAULT_GPX_OPTS = {
-  parseElements: ['track', 'route']
+  color: 'blue'
 };
 L.GPX = L.FeatureGroup.extend({
   initialize: function(gpx, options) {
@@ -65,23 +62,35 @@ L.GPX = L.FeatureGroup.extend({
     options.polyline_options = this._merge_objs(
       _DEFAULT_POLYLINE_OPTS,
       options.polyline_options || {});
-    options.gpx_options = this._merge_objs(
-      _DEFAULT_GPX_OPTS,
-      options.gpx_options || {});
 
     L.Util.setOptions(this, options);
 
     // Base icon class for track pins.
-    L.GPXTrackIcon = L.Icon.extend({ options: options.marker_options });
+    L.GPXTrackIcon = L.Icon.extend({
+      options: options.marker_options
+    });
 
     this._gpx = gpx;
     this._layers = {};
     this._info = {
       name: null,
       length: 0.0,
-      elevation: {gain: 0.0, loss: 0.0, _points: []},
-      hr: {avg: 0, _total: 0, _points: []},
-      duration: {start: null, end: null, moving: 0, total: 0},
+      elevation: {
+        gain: 0.0,
+        loss: 0.0,
+        _points: []
+      },
+      hr: {
+        avg: 0,
+        _total: 0,
+        _points: []
+      },
+      duration: {
+        start: null,
+        end: null,
+        moving: 0,
+        total: 0
+      },
     };
 
     if (gpx) {
@@ -107,80 +116,108 @@ L.GPX = L.FeatureGroup.extend({
     if (secs < 10) s += '0';
     s += secs;
 
-    if (!hidems && duration > 0) s += '.' + Math.round(Math.floor(duration)*1000)/1000;
+    if (!hidems && duration > 0) s += '.' + Math.round(Math.floor(duration) * 1000) / 1000;
     else s += '"';
 
     return s;
   },
 
-  // Public methods
-  to_miles:            function(v) { return v / 1.60934; },
-  to_ft:               function(v) { return v * 3.28084; },
-  m_to_km:             function(v) { return v / 1000; },
-  m_to_mi:             function(v) { return v / 1609.34; },
+  to_miles: function(v) {
+    return v / 1.60934;
+  },
+  to_ft: function(v) {
+    return v * 3.28084;
+  },
+  m_to_km: function(v) {
+    return v / 1000;
+  },
+  m_to_mi: function(v) {
+    return v / 1609.34;
+  },
 
-  get_name:            function() { return this._info.name; },
-  get_desc:            function() { return this._info.desc; },
-  get_author:          function() { return this._info.author; },
-  get_copyright:       function() { return this._info.copyright; },
-  get_desc:            function() { return this._info.desc; },
-  get_distance:        function() { return this._info.length; },
-  get_distance_imp:    function() { return this.to_miles(this.m_to_km(this.get_distance())); },
+  get_name: function() {
+    return this._info.name;
+  },
+  get_distance: function() {
+    return this._info.length;
+  },
+  get_distance_imp: function() {
+    return this.to_miles(this.m_to_km(this.get_distance()));
+  },
 
-  get_start_time:      function() { return this._info.duration.start; },
-  get_end_time:        function() { return this._info.duration.end; },
-  get_moving_time:     function() { return this._info.duration.moving; },
-  get_total_time:      function() { return this._info.duration.total; },
+  get_start_time: function() {
+    return this._info.duration.start;
+  },
+  get_end_time: function() {
+    return this._info.duration.end;
+  },
+  get_moving_time: function() {
+    return this._info.duration.moving;
+  },
+  get_total_time: function() {
+    return this._info.duration.total;
+  },
 
-  get_moving_pace:     function() { return this.get_moving_time() / this.m_to_km(this.get_distance()); },
-  get_moving_pace_imp: function() { return this.get_moving_time() / this.get_distance_imp(); },
-  
-  get_moving_speed:    function() { return this.m_to_km(this.get_distance()) / (this.get_moving_time() / (3600 * 1000)) ; },
-  get_moving_speed_imp:function() { return this.to_miles(this.m_to_km(this.get_distance())) / (this.get_moving_time() / (3600 * 1000)) ; },
+  get_moving_pace: function() {
+    return this.get_moving_time() / this.m_to_km(this.get_distance());
+  },
+  get_moving_pace_imp: function() {
+    return this.get_moving_time() / this.get_distance_imp();
+  },
 
-  get_elevation_gain:     function() { return this._info.elevation.gain; },
-  get_elevation_loss:     function() { return this._info.elevation.loss; },
-  get_elevation_data:     function() {
+  get_elevation_gain: function() {
+    return this._info.elevation.gain;
+  },
+  get_elevation_loss: function() {
+    return this._info.elevation.loss;
+  },
+  get_elevation_data: function() {
     var _this = this;
-    return this._info.elevation._points.map(
-      function(p) { return _this._prepare_data_point(p, _this.m_to_km, null,
-        function(a, b) { return a.toFixed(2) + ' km, ' + b.toFixed(0) + ' m'; });
+    return this._info.elevation._points.map(function(p) {
+      return _this._prepare_data_point(p, _this.m_to_km, null, function(a, b) {
+        return a.toFixed(2) + ' km, ' + b.toFixed(0) + ' m';
       });
+    });
   },
   get_elevation_data_imp: function() {
     var _this = this;
-    return this._info.elevation._points.map(
-      function(p) { return _this._prepare_data_point(p, _this.m_to_mi, _this.to_ft,
-        function(a, b) { return a.toFixed(2) + ' mi, ' + b.toFixed(0) + ' ft'; });
+    return this._info.elevation._points.map(function(p) {
+      return _this._prepare_data_point(p, _this.m_to_mi, _this.to_ft, function(a, b) {
+        return a.toFixed(2) + ' mi, ' + b.toFixed(0) + ' ft';
       });
+    });
   },
 
-  get_average_hr:         function() { return this._info.hr.avg; },
-  get_heartrate_data:     function() {
+  get_average_hr: function() {
+    return this._info.hr.avg;
+  },
+  get_heartrate_data: function() {
     var _this = this;
-    return this._info.hr._points.map(
-      function(p) { return _this._prepare_data_point(p, _this.m_to_km, null,
-        function(a, b) { return a.toFixed(2) + ' km, ' + b.toFixed(0) + ' bpm'; });
+    return this._info.hr._points.map(function(p) {
+      return _this._prepare_data_point(p, _this.m_to_km, null, function(a, b) {
+        return a.toFixed(2) + ' km, ' + b.toFixed(0) + ' bpm';
       });
+    });
   },
   get_heartrate_data_imp: function() {
     var _this = this;
-    return this._info.hr._points.map(
-      function(p) { return _this._prepare_data_point(p, _this.m_to_mi, null,
-        function(a, b) { return a.toFixed(2) + ' mi, ' + b.toFixed(0) + ' bpm'; });
+    return this._info.hr._points.map(function(p) {
+      return _this._prepare_data_point(p, _this.m_to_mi, null, function(a, b) {
+        return a.toFixed(2) + ' mi, ' + b.toFixed(0) + ' bpm';
       });
-  },
-
-  reload: function() {
-    this.clearLayers();
-    this._parse(this._gpx, this.options, this.options.async);
+    });
   },
 
   // Private methods
+
   _merge_objs: function(a, b) {
     var _ = {};
-    for (var attr in a) { _[attr] = a[attr]; }
-    for (var attr in b) { _[attr] = b[attr]; }
+    for (var attr in a) {
+      _[attr] = a[attr];
+    }
+    for (var attr in b) {
+      _[attr] = b[attr];
+    }
     return _;
   },
 
@@ -198,15 +235,15 @@ L.GPX = L.FeatureGroup.extend({
     req.open('GET', url, async);
     try {
       req.overrideMimeType('text/xml'); // unsupported by IE
-    } catch(e) {}
+    } catch (e) {}
     req.onreadystatechange = function() {
       if (req.readyState != 4) return;
-      if(req.status == 200) cb(req.responseXML, options);
+      if (req.status == 200) cb(req.responseXML, options);
     };
     req.send(null);
   },
 
-  _parse: function(input, options, async) {
+  _parse: function(url, options, async) {
     var _this = this;
     var cb = function(gpx, options) {
       var layers = _this._parse_gpx_data(gpx, options);
@@ -214,74 +251,56 @@ L.GPX = L.FeatureGroup.extend({
       _this.addLayer(layers);
       _this.fire('loaded');
     }
-    if (input.substr(0,1)==='<') { // direct XML has to start with a <
-      var parser = new DOMParser();
-      setTimeout(function() {
-        cb(parser.parseFromString(input, "text/xml"), options);
-      });
-    } else {
-      this._load_xml(input, cb, options, async);
-    }
+    this._load_xml(url, cb, options, async);
   },
 
   _parse_gpx_data: function(xml, options) {
     var j, i, el, layers = [];
-    var tags = [];
-    var parseElements = options.gpx_options.parseElements;
-    if(parseElements.indexOf('route') > -1) {
-      tags.push(['rte','rtept']);
-    }
-    if(parseElements.indexOf('track') > -1) {
-      tags.push(['trkseg','trkpt']);
-    }
+    var tags = [
+      ['rte', 'rtept'],
+      ['trkseg', 'trkpt']
+    ];
 
     var name = xml.getElementsByTagName('name');
     if (name.length > 0) {
       this._info.name = name[0].textContent;
-    }
-    var desc = xml.getElementsByTagName('desc');
-    if (desc.length > 0) {
-      this._info.desc = desc[0].textContent;
-    }
-    var author = xml.getElementsByTagName('author');
-    if (author.length > 0) {
-      this._info.author = author[0].textContent;
-    }
-    var copyright = xml.getElementsByTagName('copyright');
-    if (copyright.length > 0) {
-      this._info.copyright = copyright[0].textContent;
     }
 
     for (j = 0; j < tags.length; j++) {
       el = xml.getElementsByTagName(tags[j][0]);
       for (i = 0; i < el.length; i++) {
         var coords = this._parse_trkseg(el[i], xml, options, tags[j][1]);
-        if (coords.length === 0) continue;
 
         // add track
         var l = new L.Polyline(coords, options.polyline_options);
-        this.fire('addline', { line: l })
+        this.fire('addline', {
+          line: l
+        })
         layers.push(l);
 
-        if (options.marker_options.startIconUrl) {
-          // add start pin
-          var p = new L.Marker(coords[0], {
-            clickable: false,
-              icon: new L.GPXTrackIcon({iconUrl: options.marker_options.startIconUrl})
-          });
-          this.fire('addpoint', { point: p });
-          layers.push(p);
-        }
+        // add start pin
+        var p = new L.Marker(coords[0], {
+          clickable: false,
+          icon: new L.GPXTrackIcon({
+            iconUrl: options.marker_options.startIconUrl
+          })
+        });
+        this.fire('addpoint', {
+          point: p
+        });
+        layers.push(p);
 
-        if (options.marker_options.endIconUrl) {
-          // add end pin
-          p = new L.Marker(coords[coords.length-1], {
-            clickable: false,
-            icon: new L.GPXTrackIcon({iconUrl: options.marker_options.endIconUrl})
-          });
-          this.fire('addpoint', { point: p });
-          layers.push(p);
-        }
+        // add end pin
+        p = new L.Marker(coords[coords.length - 1], {
+          clickable: false,
+          icon: new L.GPXTrackIcon({
+            iconUrl: options.marker_options.endIconUrl
+          })
+        });
+        this.fire('addpoint', {
+          point: p
+        });
+        layers.push(p);
       }
     }
 
@@ -302,9 +321,13 @@ L.GPX = L.FeatureGroup.extend({
 
     for (var i = 0; i < el.length; i++) {
       var _, ll = new L.LatLng(
-        el[i].getAttribute('lat'),
-        el[i].getAttribute('lon'));
-      ll.meta = { time: null, ele: null, hr: null };
+          el[i].getAttribute('lat'),
+          el[i].getAttribute('lon'));
+      ll.meta = {
+        time: null,
+        ele: null,
+        hr: null
+      };
 
       _ = el[i].getElementsByTagName('time');
       if (_.length > 0) {
@@ -351,13 +374,13 @@ L.GPX = L.FeatureGroup.extend({
     var R = 6371000;
     var dLat = this._deg2rad(b.lat - a.lat);
     var dLon = this._deg2rad(b.lng - a.lng);
-    var r = Math.sin(dLat/2) *
-      Math.sin(dLat/2) +
+    var r = Math.sin(dLat / 2) *
+      Math.sin(dLat / 2) +
       Math.cos(this._deg2rad(a.lat)) *
       Math.cos(this._deg2rad(b.lat)) *
-      Math.sin(dLon/2) *
-      Math.sin(dLon/2);
-    var c = 2 * Math.atan2(Math.sqrt(r), Math.sqrt(1-r));
+      Math.sin(dLon / 2) *
+      Math.sin(dLon / 2);
+    var c = 2 * Math.atan2(Math.sqrt(r), Math.sqrt(1 - r));
     var d = R * c;
     return d;
   },
@@ -370,5 +393,5 @@ L.GPX = L.FeatureGroup.extend({
 
   _deg2rad: function(deg) {
     return deg * Math.PI / 180;
-  }
+  },
 });

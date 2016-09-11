@@ -33,20 +33,6 @@ class TrackController extends AbstractActionController
         $tracks = $objectManager->getRepository('Maps\Entity\Track')->findAll();
 
         $stats = array();
-/*
-        foreach($tracks as $track) {
-            $gpx = new GPXIngest();
-            $gpx->loadFile($track->getFilename());
-            $gpx->ingest();
-            $gpxStats = $gpx->getJourneyStats();;
-            $stats[$track->getId()] = array(
-                'trackpoints' => $gpxStats->trackpoints,
-                'recordedDuration' => gmdate("H:i:s", $gpxStats->recordedDuration),
-                'start' => date("F j, Y, H:i", $gpxStats->start),
-                'end' => date("F j, Y, H:i", $gpxStats->end),
-            );
-        }
-*/
 
         return new ViewModel(
             array(
